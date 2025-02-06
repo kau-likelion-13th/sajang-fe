@@ -1,0 +1,13 @@
+.product-container {
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
