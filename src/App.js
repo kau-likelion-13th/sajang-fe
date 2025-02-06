@@ -1,14 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Mypage from './pages/Mypage/Mypage'; 
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Mypage from "./pages/Mypage/Mypage";
+import New from "./pages/New/New";
+import Perfume from "./pages/Perfume/Perfume";
+import Diffuser from "./pages/Diffuser/Diffuser";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} /> 
-        <Route path="/mypage" element={<Mypage />} /> 
+        <Route path="/" element={<Home />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/new" element={<New />} />
+        <Route path="/perfume" element={<Perfume />} />
+        <Route path="/diffuser" element={<Diffuser />} />
       </Routes>
     </Router>
   );
