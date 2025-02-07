@@ -1,5 +1,5 @@
 import React from "react";
-import "./../styles/Banner.css";
+import "../../styles/ProductPage.css";
 
 const Banner = ({ title, imagePath }) => {
   return (

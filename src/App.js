@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Mypage from "./pages/Mypage/Mypage";
-import New from "./pages/New/New";
-import Perfume from "./pages/Perfume/Perfume";
-import Diffuser from "./pages/Diffuser/Diffuser";
+import New from "./pages/ProductPage/New";
+import Perfume from "./pages/ProductPage/Perfume";
+import Diffuser from "./pages/ProductPage/Diffuser";
 
 function App() {
   return (

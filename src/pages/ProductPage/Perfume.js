@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Banner from "../../components/Banner";
-import ProductCard from "../../components/ProductCard";
-import "../../styles/Perfume.css";
+import Banner from "./Banner";
+import ProductCard from "./ProductCard";
+import "../../styles/ProductPage.css";
 
 const Perfume = () => {
   const products = [
