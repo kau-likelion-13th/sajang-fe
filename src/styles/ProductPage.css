@@ -8,50 +8,6 @@
   src: url("../../public/font/KaiseiDecol-Regular.ttf") format("truetype");
 }
 
-/* ProductPage Base */
-.product-container {
-  width: 100%;
-  padding: 80px;
-  box-sizing: border-box;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 84px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.paging {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  gap: 38px;
-}
-
-.paging button {
-  padding: 10px 15px;
-  font-size: 14px;
-  border: none;
-  border-radius: 10px;
-  background-color: #e7eff5;
-  color: #3a3a3a;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.paging button.active {
-  background-color: #9698a4;
-  color: #ffffff;
-}
-
-.paging button:hover {
-  background-color: #9698a4;
-  color: #ffffff;
-}
-
 /* Banner Component */
 .banner {
   position: relative;
@@ -122,4 +78,48 @@
   padding: 10px 5px 10px 5px;
   border-radius: 50px;
   text-align: center;
+}
+
+/* ProductPage Base */
+.product-container {
+  width: 100%;
+  padding: 80px;
+  box-sizing: border-box;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 84px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 38px;
+}
+
+.paging button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e7eff5;
+  color: #3a3a3a;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.paging button.active {
+  background-color: #9698a4;
+  color: #ffffff;
+}
+
+.paging button:hover {
+  background-color: #9698a4;
+  color: #ffffff;
 }
