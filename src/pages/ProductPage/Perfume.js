@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Banner from "./Banner";
 import ProductCard from "./ProductCard";
 import "../../styles/ProductPage.css";
+import PayModal from "./../../components/PayModal";
 
 const Perfume = () => {
   const products = [
@@ -9,7 +10,7 @@ const Perfume = () => {
       id: 1,
       name: "시레나 오 드 퍼퓸",
       brand: "플로리스 런던",
-      price: "297,000 원",
+      price: 297000,
       imagePath: "/img/perfume_1.png",
       isNew: false,
     },
@@ -17,7 +18,7 @@ const Perfume = () => {
       id: 2,
       name: "시레나 오 드 퍼퓸",
       brand: "플로리스 런던",
-      price: "297,000 원",
+      price: 297000,
       imagePath: "/img/perfume_2.png",
       isNew: false,
     },
@@ -25,7 +26,7 @@ const Perfume = () => {
       id: 3,
       name: "시레나 오 드 퍼퓸",
       brand: "플로리스 런던",
-      price: "297,000 원",
+      price: 297000,
       imagePath: "/img/perfume_3.png",
       isNew: false,
     },
@@ -33,7 +34,7 @@ const Perfume = () => {
       id: 4,
       name: "시레나 오 드 퍼퓸",
       brand: "플로리스 런던",
-      price: "297,000 원",
+      price: 297000,
       imagePath: "/img/perfume_4.png",
       isNew: false,
     },
@@ -41,7 +42,7 @@ const Perfume = () => {
       id: 5,
       name: "시레나 오 드 퍼퓸",
       brand: "플로리스 런던",
-      price: "297,000 원",
+      price: 297000,
       imagePath: "/img/perfume_5.png",
       isNew: false,
     },
@@ -60,13 +61,30 @@ const Perfume = () => {
     setCurrentPage(pageNumber);
   };
 
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCardClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <Banner title="Perfume" imagePath={"/banner_perfume.png"} />
       <div className="product-container">
         <div className="product-grid">
           {currentProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => handleCardClick(product)}
+            />
           ))}
         </div>
         <div className="paging">
@@ -93,6 +111,9 @@ const Perfume = () => {
           )}
         </div>
       </div>
+      {isModalOpen && (
+        <PayModal product={selectedProduct} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import "../../styles/ProductPage.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onClick }) => {
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={onClick}>
       {product.isNew && <div className="new-badge">New</div>}
       <img
         src={product.imagePath}
@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
       />
       <div className="product-name">{product.name}</div>
       <div className="product-brand">{product.brand}</div>
-      <div className="product-price">{product.price}</div>
+      <div className="product-price">{product.price.toLocaleString()} 원</div>
     </div>
   );
 };
