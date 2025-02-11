@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Banner from "./Banner";
 import ProductCard from "./ProductCard";
 import "../../styles/ProductPage.css";
+import PayModal from "../../components/PayModal";
 
 const Diffuser = () => {
   const products = [
@@ -9,7 +10,7 @@ const Diffuser = () => {
       id: 1,
       name: "벚꽃 디퓨저",
       brand: "코코도르",
-      price: "40,000 원",
+      price: 40000,
       imagePath: "/img/diffuser_1.png",
       isNew: false,
     },
@@ -17,7 +18,7 @@ const Diffuser = () => {
       id: 2,
       name: "벚꽃 디퓨저",
       brand: "코코도르",
-      price: "40,000 원",
+      price: 40000,
       imagePath: "/img/diffuser_2.png",
       isNew: false,
     },
@@ -25,7 +26,7 @@ const Diffuser = () => {
       id: 3,
       name: "벚꽃 디퓨저",
       brand: "코코도르",
-      price: "40,000 원",
+      price: 40000,
       imagePath: "/img/diffuser_3.png",
       isNew: false,
     },
@@ -33,7 +34,7 @@ const Diffuser = () => {
       id: 4,
       name: "벚꽃 디퓨저",
       brand: "코코도르",
-      price: "40,000 원",
+      price: 40000,
       imagePath: "/img/diffuser_4.png",
       isNew: false,
     },
@@ -41,7 +42,7 @@ const Diffuser = () => {
       id: 5,
       name: "벚꽃 디퓨저",
       brand: "코코도르",
-      price: "40,000 원",
+      price: 40000,
       imagePath: "/img/diffuser_5.png",
       isNew: false,
     },
@@ -60,13 +61,30 @@ const Diffuser = () => {
     setCurrentPage(pageNumber);
   };
 
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCardClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <Banner title="Diffuser" imagePath={"/banner_diffuser.png"} />
       <div className="product-container">
         <div className="product-grid">
           {currentProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => handleCardClick(product)}
+            />
           ))}
         </div>
         <div className="paging">
@@ -93,6 +111,9 @@ const Diffuser = () => {
           )}
         </div>
       </div>
+      {isModalOpen && (
+        <PayModal product={selectedProduct} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
