@@ -1,10 +1,15 @@
-import React from 'react';
+import React from "react";
+import "../../styles/Home.css";
+import Menu from "./Menu";
+import Info from "./Info";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
-    <div>
-      <h1>야 너두 사장될 수 있어!</h1>
-      <p>멋쟁이 사자처럼 13기</p>
+    <div className="home-container">
+      <Banner></Banner>
+      <Menu></Menu>
+      <Info></Info>
     </div>
   );
 };
