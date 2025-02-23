@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import ToolBar from "./components/ToolBar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home/Home";
 import Mypage from "./pages/Mypage/Mypage";
 import New from "./pages/ProductPage/New";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/perfume" element={<Perfume />} />
         <Route path="/diffuser" element={<Diffuser />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
