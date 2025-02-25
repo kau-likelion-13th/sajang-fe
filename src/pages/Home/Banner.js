@@ -1,10 +1,41 @@
 import React from "react";
 import Slider from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../../styles/CustomBanner.css";
+
+// 커스텀 화살표 컴포넌트
+const CustomArrow = ({ onClick, direction }) => {
+  const isPrev = direction === "prev";
+  const arrowStyle = {
+    width: "fit-content",
+    height: "fit-content",
+    position: "absolute",
+    top: "50%",
+    transform: isPrev ? "translateY(-50%)" : "translateY(-50%) rotate(180deg)",
+    zIndex: 1,
+    [isPrev ? "left" : "right"]: "25px",
+  };
+
+  return (
+    <button
+      type="button"
+      data-role="none"
+      className={`slick-arrow slick-${direction}`}
+      onClick={onClick}
+      style={arrowStyle}
+    >
+      <img
+        src={`${process.env.PUBLIC_URL}/icon/icon_banner_arrow.svg`}
+        alt={isPrev ? "Previous" : "Next"}
+        style={{ width: "144px", height: "144px" }}
+      />
+    </button>
+  );
+};
 
 const Banner = () => {
-  // 슬라이드 설정
   const settings = {
     dots: true, // 하단 도트 표시
     infinite: true, // 무한 반복
@@ -14,6 +45,8 @@ const Banner = () => {
     autoplay: true, // 자동 재생
     autoplaySpeed: 3000, // 자동 재생 속도 (ms)
     arrows: true, // 옆으로 이동하는 화살표 표시 여부
+    prevArrow: <CustomArrow direction="prev" />, // 커스텀 이전 화살표
+    nextArrow: <CustomArrow direction="next" />, // 커스텀 다음 화살표
   };
 
   // 배너 이미지 배열
@@ -31,7 +64,7 @@ const Banner = () => {
             <img
               src={image}
               alt={`slide-${index + 1}`}
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: "100%", height: "90vh", objectFit: "cover" }}
             />
           </div>
         ))}
@@ -39,4 +72,5 @@ const Banner = () => {
     </div>
   );
 };
+
 export default Banner;
