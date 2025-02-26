@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../styles/PayModal.css";
 
 const PayModal = ({ product, onClose }) => {
@@ -7,6 +8,7 @@ const PayModal = ({ product, onClose }) => {
   const maxMileage = 100000;
   const [productPrice, setProductPrice] = useState(product.price);
   const [totalPrice, setTotalPrice] = useState(product.price);
+
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "plus" ? prev + 1 : Math.max(1, prev - 1)));
   };
@@ -21,6 +23,36 @@ const PayModal = ({ product, onClose }) => {
     const value = e.target.value;
     const numericValue = value === "" ? 0 : Math.min(Number(value), maxMileage);
     setMileage(numericValue);
+  };
+
+  const handlePayment = async () => {
+    try {
+      const response = await axios.post(
+        "/orders",
+        {
+          itemId: product.id,
+          quantity: quantity,
+          mileageToUse: mileage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTc0NjQ4LCJleHAiOjE3NDA1NzgyNDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.1N86CHzs5m38WKBqesuhub103e0n7igJiXGF6ctZiFI",
+          },
+        }
+      );
+
+      if (response.data.isSuccess) {
+        alert("주문이 성공적으로 생성되었습니다.");
+        onClose();
+      } else {
+        alert(`주문 실패: ${response.data.message}`);
+      }
+    } catch (error) {
+      console.error("결제 오류:", error);
+      alert("결제 처리 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -107,7 +139,9 @@ const PayModal = ({ product, onClose }) => {
           </div>
         </div>
 
-        <button className="pay-button">결제하기</button>
+        <button className="pay-button" onClick={handlePayment}>
+          결제하기
+        </button>
       </div>
     </div>
   );
