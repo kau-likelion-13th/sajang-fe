@@ -1,55 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Banner from "./Banner";
 import ProductCard from "./ProductCard";
 import "../../styles/ProductPage.css";
 import PayModal from "./../../components/PayModal";
 
 const Perfume = () => {
-  const products = [
-    {
-      id: 1,
-      name: "시레나 오 드 퍼퓸",
-      brand: "플로리스 런던",
-      price: 297000,
-      imagePath: "/img/perfume_1.png",
-      isNew: false,
-    },
-    {
-      id: 2,
-      name: "시레나 오 드 퍼퓸",
-      brand: "플로리스 런던",
-      price: 297000,
-      imagePath: "/img/perfume_2.png",
-      isNew: false,
-    },
-    {
-      id: 3,
-      name: "시레나 오 드 퍼퓸",
-      brand: "플로리스 런던",
-      price: 297000,
-      imagePath: "/img/perfume_3.png",
-      isNew: false,
-    },
-    {
-      id: 4,
-      name: "시레나 오 드 퍼퓸",
-      brand: "플로리스 런던",
-      price: 297000,
-      imagePath: "/img/perfume_4.png",
-      isNew: false,
-    },
-    {
-      id: 5,
-      name: "시레나 오 드 퍼퓸",
-      brand: "플로리스 런던",
-      price: 297000,
-      imagePath: "/img/perfume_5.png",
-      isNew: false,
-    },
-  ];
+  const [products, setProducts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
+
+  useEffect(() => {
+    axios
+      .get("/categories/2/items", {
+        headers: {
+          accept: "*/*",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTUxNDM4LCJleHAiOjE3NDA1NTUwMzgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.g1f065B9IsyCcC1Mt-M9lTeZF7xQ4GcyBrrNko1onQ0",
+          "Refresh-Token":
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTUxNDM4LCJleHAiOjE3NDA2Mzc4Mzh9.XTdIDMoSeOrP3fAEsU07l3uSC6evG_qQ_IDjAy8aaTk",
+        },
+      })
+      .then((response) => {
+        setProducts(response.data.result);
+      })
+      .catch((err) => {
+        console.log("API 요청 실패:", err);
+      });
+  }, []);
 
   const totatlPages = Math.ceil(products.length / itemsPerPage);
 
@@ -82,7 +61,14 @@ const Perfume = () => {
           {currentProducts.map((product) => (
             <ProductCard
               key={product.id}
-              product={product}
+              product={{
+                id: product.id,
+                name: product.name,
+                brand: product.brand,
+                price: product.price,
+                imagePath: product.thumbnail,
+                isNew: false,
+              }}
               onClick={() => handleCardClick(product)}
             />
           ))}
