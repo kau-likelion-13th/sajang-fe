@@ -17,7 +17,7 @@ const New = () => {
         headers: {
           accept: "*/*",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTcyMDI4LCJleHAiOjE3NDA1NzU2MjgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.hcs7YKR59TNiC0qX-_gtnvpN1AKifjdJY_VSWgPTxnw",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTgwMjcxLCJleHAiOjE3NDA1ODM4NzEsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.tTXmORRioDPVc_HKpEZRvLcw6X2VeDIMjc6yoMn6i20",
         },
       })
       .then((response) => {
@@ -64,8 +64,8 @@ const New = () => {
                 name: product.name,
                 brand: product.brand,
                 price: product.price,
-                imagePath: product.thumbnail,
-                isNew: false,
+                imagePath: product.imagePath,
+                isNew: product.isNew,
               }}
               onClick={() => handleCardClick(product)}
             />
