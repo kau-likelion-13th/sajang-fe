@@ -4,7 +4,7 @@ import "../styles/PayModal.css";
 
 const PayModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
-  const [mileage, setMileage] = useState("");
+  const [mileageToUse, setMileageToUse] = useState("");
   const maxMileage = 100000;
   const [productPrice, setProductPrice] = useState(product.price);
   const [totalPrice, setTotalPrice] = useState(product.price);
@@ -16,13 +16,13 @@ const PayModal = ({ product, onClose }) => {
   useEffect(() => {
     const newProductPrice = product.price * quantity;
     setProductPrice(newProductPrice);
-    setTotalPrice(Math.max(newProductPrice - mileage, 0));
-  }, [quantity, mileage, product.price]);
+    setTotalPrice(Math.max(newProductPrice - mileageToUse, 0));
+  }, [quantity, mileageToUse, product.price]);
 
   const handleMileageChange = (e) => {
     const value = e.target.value;
     const numericValue = value === "" ? 0 : Math.min(Number(value), maxMileage);
-    setMileage(numericValue);
+    setMileageToUse(numericValue);
   };
 
   const handlePayment = async () => {
@@ -32,7 +32,7 @@ const PayModal = ({ product, onClose }) => {
         {
           itemId: product.id,
           quantity: quantity,
-          mileageToUse: mileage,
+          mileageToUse: mileageToUse,
         },
         {
           headers: {
@@ -114,7 +114,7 @@ const PayModal = ({ product, onClose }) => {
           <input
             className="mileage-input"
             placeholder="사용하실 마일리지를 입력하세요"
-            value={mileage}
+            value={mileageToUse}
             onChange={handleMileageChange}
           />
         </div>
@@ -132,7 +132,7 @@ const PayModal = ({ product, onClose }) => {
                 {totalPrice.toLocaleString()} 원
               </div>
               <div className="total-value discount">
-                -{mileage.toLocaleString()} 원
+                -{mileageToUse.toLocaleString()} 원
               </div>
               <div className="total-value">무료배송</div>
             </div>
