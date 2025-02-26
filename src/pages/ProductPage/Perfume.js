@@ -13,13 +13,11 @@ const Perfume = () => {
 
   useEffect(() => {
     axios
-      .get("/categories/2/items", {
+      .get("/categories/3/items", {
         headers: {
           accept: "*/*",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTUxNDM4LCJleHAiOjE3NDA1NTUwMzgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.g1f065B9IsyCcC1Mt-M9lTeZF7xQ4GcyBrrNko1onQ0",
-          "Refresh-Token":
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTUxNDM4LCJleHAiOjE3NDA2Mzc4Mzh9.XTdIDMoSeOrP3fAEsU07l3uSC6evG_qQ_IDjAy8aaTk",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTcyMDI4LCJleHAiOjE3NDA1NzU2MjgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.hcs7YKR59TNiC0qX-_gtnvpN1AKifjdJY_VSWgPTxnw",
         },
       })
       .then((response) => {
