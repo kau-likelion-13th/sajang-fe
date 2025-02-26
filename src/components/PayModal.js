@@ -112,7 +112,7 @@ const PayModal = ({ product, onClose }) => {
             현재 사용 가능한 마일리지: {maxMileage.toLocaleString()} 원
           </div>
           <input
-            className="mileage-input"
+            className="mileageToUse-input"
             placeholder="사용하실 마일리지를 입력하세요"
             value={mileageToUse}
             onChange={handleMileageChange}
