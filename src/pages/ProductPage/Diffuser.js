@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 import Banner from "./Banner";
 import ProductCard from "./ProductCard";
@@ -6,6 +7,7 @@ import "../../styles/ProductPage.css";
 import PayModal from "../../components/PayModal";
 
 const Diffuser = () => {
+  const [cookies] = useCookies(["accessToken"]);
   const [products, setProducts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,8 +18,7 @@ const Diffuser = () => {
       .get("/categories/2/items", {
         headers: {
           accept: "*/*",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNzI2MDA4LCJleHAiOjE3NDA3Mjk2MDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.6EmzslQkg7BgAJG31XcucK-DsW-l9u3WqJZviMnYSCU",
+          Authorization: `Bearer ${cookies.accessToken}`,
         },
       })
       .then((response) => {
@@ -26,7 +27,7 @@ const Diffuser = () => {
       .catch((err) => {
         console.log("API 요청 실패:", err);
       });
-  }, []);
+  }, [cookies.accessToken]);
 
   const totatlPages = Math.ceil(products.length / itemsPerPage);
 
