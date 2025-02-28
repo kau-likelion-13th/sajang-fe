@@ -5,9 +5,26 @@ import "../styles/PayModal.css";
 const PayModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [mileageToUse, setMileageToUse] = useState("");
-  const maxMileage = 100000;
+  const [maxMileage, setMaxMileage] = useState(0);
   const [productPrice, setProductPrice] = useState(product.price);
   const [totalPrice, setTotalPrice] = useState(product.price);
+
+  useEffect(() => {
+    axios
+      .get("/users/mileage", {
+        headers: {
+          accept: "*/*",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNzI2MDA4LCJleHAiOjE3NDA3Mjk2MDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.6EmzslQkg7BgAJG31XcucK-DsW-l9u3WqJZviMnYSCU",
+        },
+      })
+      .then((response) => {
+        setMaxMileage(response.data.result.maxMileage);
+      })
+      .catch((err) => {
+        console.log("API 요청 실패:", err);
+      });
+  }, []);
 
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "plus" ? prev + 1 : Math.max(1, prev - 1)));
@@ -38,7 +55,7 @@ const PayModal = ({ product, onClose }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNTc0NjQ4LCJleHAiOjE3NDA1NzgyNDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.1N86CHzs5m38WKBqesuhub103e0n7igJiXGF6ctZiFI",
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNzI2MDA4LCJleHAiOjE3NDA3Mjk2MDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.6EmzslQkg7BgAJG31XcucK-DsW-l9u3WqJZviMnYSCU",
           },
         }
       );
