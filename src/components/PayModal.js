@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import "../styles/PayModal.css";
 
 const PayModal = ({ product, onClose }) => {
+  const [cookies] = useCookies(["accessToken"]);
   const [quantity, setQuantity] = useState(1);
   const [mileageToUse, setMileageToUse] = useState("");
   const [maxMileage, setMaxMileage] = useState(0);
@@ -14,8 +16,7 @@ const PayModal = ({ product, onClose }) => {
       .get("/users/mileage", {
         headers: {
           accept: "*/*",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNzI2MDA4LCJleHAiOjE3NDA3Mjk2MDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.6EmzslQkg7BgAJG31XcucK-DsW-l9u3WqJZviMnYSCU",
+          Authorization: `Bearer ${cookies.accessToken}`,
         },
       })
       .then((response) => {
@@ -24,7 +25,7 @@ const PayModal = ({ product, onClose }) => {
       .catch((err) => {
         console.log("API 요청 실패:", err);
       });
-  }, []);
+  }, [cookies.accessToken]);
 
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "plus" ? prev + 1 : Math.max(1, prev - 1)));
@@ -54,8 +55,7 @@ const PayModal = ({ product, onClose }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTM3ODI3NDg2IiwiaWF0IjoxNzQwNzI2MDA4LCJleHAiOjE3NDA3Mjk2MDgsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.6EmzslQkg7BgAJG31XcucK-DsW-l9u3WqJZviMnYSCU",
+            Authorization: `Bearer ${cookies.accessToken}`,
           },
         }
       );
@@ -119,7 +119,7 @@ const PayModal = ({ product, onClose }) => {
           <div className="user-info">아리</div>
           <div className="user-info">010-0000-0000</div>
           <div className="user-info">
-            경기도 고양시 덕양구 항공대학로 76 국제은익관 1생활관 F000
+            경기도 고양시 덕양구 항공대학로 76 한국항공대학교
           </div>
         </div>
 
