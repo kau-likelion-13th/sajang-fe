@@ -15,19 +15,14 @@ const Perfume = () => {
 
   useEffect(() => {
     axios
-      .get("/categories/3/items", {
-        headers: {
-          accept: "*/*",
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      })
+      .get("/categories/3/items")
       .then((response) => {
         setProducts(response.data.result);
       })
       .catch((err) => {
         console.log("API 요청 실패:", err);
       });
-  }, [cookies.accessToken]);
+  }, []);
 
   const totatlPages = Math.ceil(products.length / itemsPerPage);
 
@@ -43,6 +38,10 @@ const Perfume = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCardClick = (product) => {
+    if (typeof cookies.accessToken !== "string") {
+      alert("로그인이 필요합니다.");
+      return;
+    }
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
