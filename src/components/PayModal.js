@@ -43,7 +43,9 @@ const PayModal = ({ product, onClose }) => {
     setMileageToUse(numericValue);
   };
 
-  const handlePayment = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const response = await axios.post(
         "/orders",
@@ -81,84 +83,92 @@ const PayModal = ({ product, onClose }) => {
         </button>
         <div className="title">주문 / 결제</div>
 
-        <div className="section">
-          <div className="section-title">주문 상품</div>
-          <div className="order-info">
-            <img
-              src={product.imagePath}
-              alt={product.name}
-              className="order-image"
+        <form onSubmit={handleSubmit}>
+          <div className="section">
+            <div className="section-title">주문 상품</div>
+            <div className="order-info">
+              <img
+                src={product.imagePath}
+                alt={product.name}
+                className="order-image"
+              />
+              <div>
+                <div className="order-name">{product.name}</div>
+                <div className="order-brand">{product.brand}</div>
+                <div className="order-price">
+                  {product.price.toLocaleString()} 원
+                </div>
+                <div className="quantity-control">
+                  <button
+                    type="button"
+                    className="quantity-button"
+                    onClick={() => handleQuantityChange("minus")}
+                  >
+                    -
+                  </button>
+                  <div className="quantity">{quantity}</div>
+                  <button
+                    type="button"
+                    className="quantity-button"
+                    onClick={() => handleQuantityChange("plus")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="section">
+            <div className="section-title">배송지</div>
+            <div className="user-info">아리</div>
+            <div className="user-info">010-0000-0000</div>
+            <div className="user-info">
+              경기도 고양시 덕양구 항공대학로 76 한국항공대학교
+            </div>
+          </div>
+
+          <div className="section">
+            <div className="section-title">마일리지 사용</div>
+            <div className="mileage-info">
+              현재 사용 가능한 마일리지: {maxMileage.toLocaleString()} 원
+            </div>
+            <input
+              className="mileage-input"
+              placeholder="사용하실 마일리지를 입력하세요"
+              value={mileageToUse}
+              onChange={handleMileageChange}
+              name="mileage"
+              type="number"
+              min="0"
+              max={maxMileage}
             />
-            <div>
-              <div className="order-name">{product.name}</div>
-              <div className="order-brand">{product.brand}</div>
-              <div className="order-price">
-                {product.price.toLocaleString()} 원
+          </div>
+
+          <div className="section">
+            <div className="section-title">총 결제금액</div>
+            <div className="total">
+              <div>
+                <div className="total-item">총 상품금액</div>
+                <div className="total-item">마일리지 할인</div>
+                <div className="total-item">배송비</div>
               </div>
-              <div className="quantity-control">
-                <button
-                  className="quantity-button"
-                  onClick={() => handleQuantityChange("minus")}
-                >
-                  -
-                </button>
-                <div className="quantity">{quantity}</div>
-                <button
-                  className="quantity-button"
-                  onClick={() => handleQuantityChange("plus")}
-                >
-                  +
-                </button>
+              <div>
+                <div className="total-value">
+                  {totalPrice.toLocaleString()} 원
+                </div>
+                <div className="total-value discount">
+                  -{mileageToUse.toLocaleString()} 원
+                </div>
+                <div className="total-value">무료배송</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="section">
-          <div className="section-title">배송지</div>
-          <div className="user-info">아리</div>
-          <div className="user-info">010-0000-0000</div>
-          <div className="user-info">
-            경기도 고양시 덕양구 항공대학로 76 한국항공대학교
-          </div>
-        </div>
-
-        <div className="section">
-          <div className="section-title">마일리지 사용</div>
-          <div className="mileage-info">
-            현재 사용 가능한 마일리지: {maxMileage.toLocaleString()} 원
-          </div>
-          <input
-            className="mileage-input"
-            placeholder="사용하실 마일리지를 입력하세요"
-            value={mileageToUse}
-            onChange={handleMileageChange}
-          />
-        </div>
-
-        <div className="section">
-          <div className="section-title">총 결제금액</div>
-          <div className="total">
-            <div>
-              <div className="total-item">총 상품금액</div>
-              <div className="total-item">마일리지 할인</div>
-              <div className="total-item">배송비</div>
-            </div>
-            <div>
-              <div className="total-value">
-                {totalPrice.toLocaleString()} 원
-              </div>
-              <div className="total-value discount">
-                -{mileageToUse.toLocaleString()} 원
-              </div>
-              <div className="total-value">무료배송</div>
-            </div>
-          </div>
-        </div>
-
-        <button className="pay-button" onClick={handlePayment}>
-          결제하기
-        </button>
+          <button type="submit" className="pay-button">
+            결제하기
+          </button>
+        </form>
       </div>
     </div>
   );
