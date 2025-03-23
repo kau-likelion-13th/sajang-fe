@@ -8,7 +8,7 @@ const PayModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [mileageToUse, setMileageToUse] = useState("");
   const [maxMileage, setMaxMileage] = useState(0);
-  const [productPrice, setProductPrice] = useState(product.price);
+  const [, setProductPrice] = useState(product.price);
   const [totalPrice, setTotalPrice] = useState(product.price);
 
   useEffect(() => {

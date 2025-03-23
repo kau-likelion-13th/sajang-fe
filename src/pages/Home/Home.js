@@ -7,7 +7,7 @@ import Info from "./Info";
 import Banner from "./Banner";
 
 const Home = ({ onLoginChange }) => {
-  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [, setCookie] = useCookies(["accessToken"]);
   const navigate = useNavigate();
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
