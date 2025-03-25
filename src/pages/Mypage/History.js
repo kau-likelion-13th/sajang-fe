@@ -46,7 +46,13 @@ const History = ({ historyData, onCancel }) => {
                         <div
                           className="history-cancel-button"
                           onClick={() => {
-                            onCancel(item?.orderId); 
+                            if(item?.status === "PROCESSING") {
+                              onCancel(item?.orderId);
+                            }
+                          }}
+                          style={{
+                            cursor: item?.status === "PROCESSING" ? "pointer" : "not-allowed",
+                            opacity: item?.status === "PROCESSING" ? 1 : 0.5
                           }}
                         >  
                           취소
