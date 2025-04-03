@@ -15,7 +15,7 @@ header {
   padding: 24px 30px;
   font-size: 22px;
   font-family: "KaiseiDecol-Regular";
-  z-index: 1000;
+  z-index: 1;
   background-color: rgba(255, 255, 255, 0.25);
 }
 
