@@ -7,8 +7,15 @@ const ToolBar = ({ isLogin, onLoginChange }) => {
   const [cookies, removeCookie] = useCookies(["accessToken"]);
 
   const handleLoginRedirect = () => {
-    window.location.href =
-      "http://sajang-dev-env-2.eba-3ycixkjh.ap-northeast-2.elasticbeanstalk.com";
+    const redirectUrl =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://likelionshop.netlify.app";
+  
+    // redirect_uri를 /oauth2/authorization/kakao 에 붙여서 전달
+    const oauthUrl = `http://sajang-dev.ap-northeast-2.elasticbeanstalk.com/oauth2/authorization/kakao?redirect_uri=${redirectUrl}`;
+  
+    window.location.href = oauthUrl;
   };
 
   const handleLogout = () => {

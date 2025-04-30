@@ -9,6 +9,15 @@ const Address = ({ addressData, onSave }) => {
   const handleAddressChange = (e) => setAddress(e.target.value);
   const handleAddressDetailChange = (e) => setAddressDetail(e.target.value);
 
+  const handleSearchPostcode = () => {
+    new window.daum.Postcode({
+      oncomplete: function (data) {
+        setZipcode(data.zonecode);
+        setAddress(data.roadAddress || data.jibunAddress);
+      }
+    }).open();
+  };
+
   return (
     <div className="address-container-wrap">
         <div className="address-title">배송지 관리</div>
@@ -17,7 +26,7 @@ const Address = ({ addressData, onSave }) => {
                 <div className="address-post">
                     <input className="address-input-post" value={zipcode} onChange={handleZipcodeChange}/>
                 </div>
-                <div className="address-button">우편번호 찾기</div>
+                <div className="address-button" onClick={handleSearchPostcode}>우편번호 찾기</div>
             </div>
             <div className="address-section">
                 <div className="address-base">
