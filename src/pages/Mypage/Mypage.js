@@ -19,13 +19,13 @@ const Mypage = () => {
       try {
         const [profileRes, addressRes, historyRes] = await Promise.all([
           axios.get("/users/profile", {
-            headers: { Authorization: `Bearer ${cookies.accessToken}` },
+            headers: { accept: "*/*", Authorization: `Bearer ${cookies.accessToken}` },
           }),
           axios.get("/users/address", {
-            headers: { Authorization: `Bearer ${cookies.accessToken}` },
+            headers: { accept: "*/*", Authorization: `Bearer ${cookies.accessToken}` },
           }),
           axios.get("/orders", {
-            headers: { Authorization: `Bearer ${cookies.accessToken}` },
+            headers: { accept: "*/*", Authorization: `Bearer ${cookies.accessToken}` },
           }),
         ]);
 
