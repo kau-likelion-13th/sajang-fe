@@ -13,9 +13,6 @@ const Mypage = () => {
   const [addressData, setAddressData] = useState(null);
   const [historyData, setHistoryData] = useState(null);
   useEffect(() => {
-    console.log(cookies);
-    console.log(cookies.accessToken);
-    cookies.accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTY2ODQzNTA4IiwiaWF0IjoxNzQ2MDIzMjQ1LCJleHAiOjE3NDYwMjY4NDUsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.-oIxclhREdzEda5PlKZWcpv1_uZ6Zk2makL-YpK0SrU";
     if (!cookies.accessToken) return;
 
     const fetchData = async () => {
