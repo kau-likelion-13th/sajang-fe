@@ -13,6 +13,9 @@ const Mypage = () => {
   const [addressData, setAddressData] = useState(null);
   const [historyData, setHistoryData] = useState(null);
   useEffect(() => {
+    console.log(cookies);
+    console.log(cookies.accessToken);
+    cookies.accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTY2ODQzNTA4IiwiaWF0IjoxNzQ2MDIzMjQ1LCJleHAiOjE3NDYwMjY4NDUsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.-oIxclhREdzEda5PlKZWcpv1_uZ6Zk2makL-YpK0SrU";
     if (!cookies.accessToken) return;
 
     const fetchData = async () => {
@@ -29,9 +32,9 @@ const Mypage = () => {
           }),
         ]);
 
-        setProfileData(profileRes.data.result);
-        setAddressData(addressRes.data.result);
-        setHistoryData(historyRes.data.result);
+        if(profileRes.isSuccess) setProfileData(profileRes.data.result);
+        if(addressRes.isSuccess) setAddressData(addressRes.data.result);
+        if(historyRes.isSuccess) setHistoryData(historyRes.data.result);
       } catch (err) {
         console.error("API 요청 실패:", err);
       }
