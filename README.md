@@ -52,9 +52,11 @@ npm install
 npm start
 ```
 
-## 🚀 배포
-
-- **Production**: Vercel을 통해 자동 배포
+## 🛠️ 기술 스택
+- Framework: React
+- Language: HTML, CSS, JavaScript
+- IDE: VSCode
+- Deployment: Vercel
 
 ## 📄 라이선스
 
