@@ -14,6 +14,7 @@
 
 ### 메인 페이지
 - 브랜드 소개 배너
+- 툴바(카카오 로그인)
 
 ### 상품 목록 페이지
 - 카테고리별 필터링 (New, Perfume, Diffuser)
@@ -34,18 +35,15 @@
 
 | 이름 | GitHub | 역할 |
 |------|--------|------|
-| 개발자1 | [@mcy0325](https://github.com/mcy0325) | Frontend Developer |
-| 개발자2 | [@yyoonngg](https://github.com/yyoonngg) | Frontend Developer |
-| 개발자3 | [@girin-sj](https://github.com/girin-sj) | Frontend Developer |
+| 아리(문채영) | [@mcy0325](https://github.com/mcy0325) | Frontend Developer |
+| 제리(권용현) | [@yyoonngg](https://github.com/yyoonngg) | Frontend Developer |
+| 이사장(이서정) | [@girin-sj](https://github.com/girin-sj) | Frontend Developer |
 
 ## 📦 설치 및 실행
 
 ```bash
 # 저장소 클론
 git clone https://github.com/kau-likelion-13th/sajang-fe.git
-
-# 디렉토리 이동
-cd sajang-fe
 
 # 의존성 설치
 npm install
